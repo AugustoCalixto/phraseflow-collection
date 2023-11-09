@@ -1,12 +1,24 @@
 'use client'
+import { listLanguages } from "@/api/languages";
 import { Lesson } from "@/types/lesson";
 import { useState } from "react";
-
+async function getLanguages() {
+  const response = await listLanguages();
+  const data = await response.json();
+  console.log(data)
+  return data;
+}
 export default function Page() {
   const [lessonData, setLessonData] = useState<Lesson>({
     title: "",
     content: "",
     questions: [],
+  });
+  
+  const [languages, setLanguages] = useState<any>([]);
+
+  getLanguages().then((data) => {
+    setLanguages(data);
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +89,17 @@ export default function Page() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+      <div>
+        <select name="languages" id="languages">
+          {
+            languages.map((language: any) => {
+              return (
+                <option value={language.id} key={language.id}>{language.name}</option>
+              )
+            })  
+          }
+        </select>
+      </div>
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2" htmlFor="title">
           Title:

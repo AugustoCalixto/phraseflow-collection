@@ -11,11 +11,12 @@ export default async function Page({ params }: { params: { lesson_id: string } }
   console.log({ lessons });
   return (
     <div className="bg-gray-100 min-h-screen">
+      <a href="/lessons/create">Criar nova lição</a>
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         {
           lessons.map((lesson: any) => {
             return (
-              <div className="bg-white mb-4 max-w-3xl mx-auto rounded" key={lesson.lessonId}>
+              <div className="bg-white mb-4 max-w-3xl mx-auto p-4 rounded" key={lesson.lessonId}>
                 <h1 className="text-3xl font-bold mb-4">{lesson.title}</h1>
                 <p className="text-gray-500 mb-8">{lesson.content}</p>
                 <div className="flex flex-col sm:flex-row justify-between mb-8">
@@ -29,7 +30,7 @@ export default async function Page({ params }: { params: { lesson_id: string } }
                   </div>
                 </div>
                 <a href={'lessons/' + lesson.id}>
-                  <div className="p-4 bg-indigo-500 text-center">
+                  <div className="p-4 bg-indigo-500 rounded text-center">
                     <span>Abrir lição</span>
                   </div>
                 </a>
