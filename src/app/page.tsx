@@ -1,113 +1,77 @@
-import Image from 'next/image'
+import React from 'react';
+import Image from 'next/image';
+
+import  MapImg  from '../../public/images/map.png';
+import StundentImg from '../../public/images/student.png';
+import StudentsImg from '../../public/images/students.png';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
+    <main className="bg-gray-100">
+      <section className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-8">
+          <div>
+            <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+              Aprenda Novos Idiomas e Explore Novos Horizontes!
+            </h1>
+            <p className="mt-4 text-xl text-gray-500">
+              Você já sonhou em explorar novos lugares, conhecer pessoas de diferentes culturas e desfrutar de experiências únicas? Aprender um novo idioma é o seu passaporte para o mundo! No nosso sistema de aprendizado de idiomas, oferecemos uma abordagem dinâmica e envolvente para ajudá-lo a dominar diversos idiomas de forma eficaz. Seja para viagens, carreira, estudos ou apenas por diversão, estamos aqui para guiar você nessa jornada emocionante.
+            </p>
+            <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Comece sua jornada agora!
+            </button>
+          </div>
+          <div className="mt-10">
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+              className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+              src={MapImg}
+              alt="Mapa mundi colorido representando todos os países do mundo"
             />
-          </a>
+          </div>
         </div>
-      </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+        <div className="mt-16 lg:mt-0 lg:grid lg:grid-cols-2 lg:gap-8">
+          <div className="mt-10">
+            <Image
+              className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+              src={StundentImg}
+              alt="Estudante sorrindo"
+            />
+          </div>
+          <div>
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              Potencialize sua Comunicação e Expanda suas Oportunidades!
+            </h2>
+            <p className="mt-4 text-lg text-gray-500">
+              Dominar um novo idioma não é apenas uma habilidade, é um superpoder! Comunicar-se em diferentes idiomas abre portas para novas oportunidades e conecta você a um mundo de possibilidades. Nosso sistema de aprendizado de idiomas foi projetado para capacitá-lo, ajudando-o a conquistar o sucesso, seja expandindo sua carreira, fazendo amigos internacionais ou simplesmente tornando suas viagens mais memoráveis. Desperte seu superpoder da comunicação conosco.
+            </p>
+            <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Veja um mundo de possibilidades!
+            </button>
+          </div>
+        </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+        <div className="mt-16 lg:grid lg:grid-cols-2 lg:gap-8">
+          <div>
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              Aprendizado Divertido, Resultados Duradouros
+            </h2>
+            <p className="mt-4 text-lg text-gray-500">
+              Aprender um novo idioma não precisa ser chato ou complicado. Nossas aulas são projetadas para serem divertidas, interativas e envolventes. Com instrutores apaixonados e materiais de alta qualidade, você verá como o aprendizado pode ser uma experiência enriquecedora. Além disso, nosso sistema permite que você aprenda no seu próprio ritmo, garantindo que os resultados sejam duradouros. Prepare-se para descobrir a alegria de se tornar fluente em um novo idioma enquanto se diverte!
+            </p>
+            <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Aprenda se divertindo!
+            </button>
+          </div>
+          <div className="mt-10">
+            <Image
+              className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+              src={StudentsImg}
+              alt="Estudantes em uma aula de idioma sorrindo"
+            />
+          </div>
+        </div>
+      </section>
     </main>
-  )
+  );
 }

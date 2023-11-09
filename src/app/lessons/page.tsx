@@ -1,163 +1,43 @@
-'use client'
-import { Lesson } from "@/types/lesson";
-import { useState } from "react";
+import { listLessons } from "@/api/lesson";
 
-export default function Page() {
-  const [lessonData, setLessonData] = useState<Lesson>({
-    title: "",
-    content: "",
-    questions: [],
-  });
+export default async function Page({ params }: { params: { lesson_id: string } }) {
+  const lessons = await listLessons();
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setLessonData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const handleLessonClick = (ev: React.MouseEvent<HTMLDivElement>) => {
+    const id = ev.currentTarget.getAttribute('key');
+    window.location.href = `/lessons/${id}`;
   };
 
-  const handleQuestionChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const { name, value } = event.target;
-    setLessonData((prevState) => {
-      const questions = [...prevState.questions];
-      questions[index] = {
-        ...questions[index],
-        [name]: value,
-      };
-      return {
-        ...prevState,
-        questions,
-      };
-    });
-  };
-
-  const handleAddQuestion = () => {
-    setLessonData((prevState) => ({
-      ...prevState,
-      questions: [
-        ...prevState.questions,
-        {
-          type: "",
-          question: "",
-          answer: "",
-        },
-      ],
-    }));
-  };
-
-  const handleRemoveQuestion = (index: number) => {
-    setLessonData((prevState) => {
-      const questions = [...prevState.questions];
-      questions.splice(index, 1);
-      return {
-        ...prevState,
-        questions,
-      };
-    });
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Add the lesson to the list of lessons
-    const lessons = JSON.parse(localStorage.getItem("lessons") || "[]");
-    lessons.push(lessonData);
-    localStorage.setItem("lessons", JSON.stringify(lessons));
-    // Reset the form
-    setLessonData({
-      title: "",
-      content: "",
-      questions: [],
-    });
-  };
-
+  console.log({ lessons });
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="title">
-          Title:
-        </label>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="title"
-          type="text"
-          name="title"
-          value={lessonData.title}
-          onChange={handleInputChange}
-        />
+    <div className="bg-gray-100 min-h-screen">
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        {
+          lessons.map((lesson: any) => {
+            return (
+              <div className="bg-white mb-4 max-w-3xl mx-auto rounded" key={lesson.lessonId}>
+                <h1 className="text-3xl font-bold mb-4">{lesson.title}</h1>
+                <p className="text-gray-500 mb-8">{lesson.content}</p>
+                <div className="flex flex-col sm:flex-row justify-between mb-8">
+                  <div className="flex flex-col">
+                    <span className="text-gray-500">Criada em:</span>
+                    <span className="text-gray-900">{new Date(lesson.createdAt).toLocaleDateString()}</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-gray-500">Última Atualização:</span>
+                    <span className="text-gray-900">{new Date(lesson.updatedAt).toLocaleDateString()}</span>
+                  </div>
+                </div>
+                <a href={'lessons/' + lesson.id}>
+                  <div className="p-4 bg-indigo-500 text-center">
+                    <span>Abrir lição</span>
+                  </div>
+                </a>
+              </div>
+            )
+          })
+        }
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="content">
-          Content:
-        </label>
-        <textarea
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="content"
-          name="content"
-          value={lessonData.content}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="questions">
-          Questions:
-        </label>
-        {lessonData.questions.map((question, index) => (
-          <div key={index} className="mb-4">
-            <select
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2"
-              name="type"
-              value={question.type}
-              onChange={(event) => handleQuestionChange(event, index)}
-            >
-              <option value="">Select a type</option>
-              <option value="translation">Translation</option>
-              <option value="open question">Open question</option>
-            </select>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2"
-              type="text"
-              name="question"
-              placeholder="Question"
-              value={question.question}
-              onChange={(event) => handleQuestionChange(event, index)}
-            />
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2"
-              type="text"
-              name="answer"
-              placeholder="Answer"
-              value={question.answer}
-              onChange={(event) => handleQuestionChange(event, index)}
-            />
-            <button
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-              onClick={() => handleRemoveQuestion(index)}
-            >
-              Remove
-            </button>
-          </div>
-        ))}
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="button"
-          onClick={handleAddQuestion}
-        >
-          Add Question
-        </button>
-      </div>
-      <div className="flex items-center justify-between">
-        <button
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="submit"
-        >
-          Create Lesson
-        </button>
-      </div>
-    </form>
+    </div>
   );
 }
